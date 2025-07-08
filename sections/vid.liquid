@@ -1,0 +1,244 @@
+{% if section.settings.desk_video_link != blank or section.settings.mobile_video_link != blank %}
+<div class="full-video-main">
+  <div class="">
+
+    {% if section.settings.desk_video_banner != blank %}
+      <img class="video_banner_image hidden-phone_desk" src="{{ section.settings.desk_video_banner | img_url:"master"}}">
+    {% endif %}
+    {% if section.settings.mob_video_banner != blank  %}
+      <img class="video_banner_image  hidden-tablet-and-up_mobile" src="{{ section.settings.mob_video_banner | img_url:"master"}}">
+    {% endif %}
+    
+    <video id="video-main-{{ section.id }}" class="hide video-main video-{{ section.id }}" width="100%"  loop   preload="true" fetchpriority="high" muted playsinline autoplay>    
+      <source src="{{ section.settings.desk_video_link }}" type="video/mp4">
+    </video>
+  
+    <div class="control-bar">
+        <button type="button" class="mute" id="mute">
+          <span class="mute-icon mute-icon-{{ section.id }}">
+            <img class="desk" src="https://cdn.shopify.com/s/files/1/0536/3594/0515/files/Artboard_1_copy_3.svg?v=1681809900">
+            <img class="mob" src="https://cdn.shopify.com/s/files/1/0536/3594/0515/files/Artboard_1_copy_3.svg?v=1681809900">
+          </span>
+          <span class="unmute-icon unmute-icon-{{ section.id }}" style="display:none;">
+            <img class="desk" src="https://cdn.shopify.com/s/files/1/0536/3594/0515/files/Artboard_1_copy_2.svg?v=1681809847">
+            <img class="mob" src="https://cdn.shopify.com/s/files/1/0536/3594/0515/files/Artboard_1_copy_2.svg?v=1681809847">
+          </span>
+        </button>
+        <button type="button" id="play">
+           <span class="vid-play vid-play-{{ section.id }}">
+            <img class="desk" src="https://cdn.shopify.com/s/files/1/0536/3594/0515/files/fixed_-_pause.svg?v=1681809936">
+            <img class="mob" src="https://cdn.shopify.com/s/files/1/0536/3594/0515/files/fixed_-_pause.svg?v=1681809936">
+           </span>
+            <span class="vid-pause vid-pause-{{ section.id }}">
+               <img class="desk" src="https://cdn.shopify.com/s/files/1/0536/3594/0515/files/fixed_-_play.svg?v=1681809936">
+              <img class="mob" src="https://cdn.shopify.com/s/files/1/0536/3594/0515/files/fixed_-_play.svg?v=1681809936">
+            </span>
+        </button>
+    </div>
+    
+  </div>
+
+  {% if section.settings.title != blank or section.settings.button_text != blank or section.settings.button_link != blank or
+                section.settings.button_text2 != blank or section.settings.button_link2 != blank or 
+                section.settings.button_text3 != blank or section.settings.button_link3 != blank %}
+    <div class="content">
+        
+      {% if section.settings.button_text != blank or section.settings.button_link != blank or section.settings.title != blank %}
+        <div class="video_button_wrapper">
+          {% if section.settings.title != blank %}
+          <h3><span>{{ section.settings.title }}</span></h3>
+        {% endif %}  
+          {% if section.settings.button_text != blank or section.settings.button_link != blank or
+                section.settings.button_text2 != blank or section.settings.button_link2 != blank or 
+                section.settings.button_text3 != blank or section.settings.button_link3 != blank %}
+            
+             <a class="first_btn" href="{% if section.settings.button_link != blank %}{{ section.settings.button_link }}{% else %}javaScript:void(0);{% endif %}">{{ section.settings.button_text }}</a>
+          {% endif %}
+          {% if section.settings.button_text2 != blank or section.settings.button_link2 != blank %}
+             <a class="second_btn" href="{% if section.settings.button_link2 != blank %}{{ section.settings.button_link2 }}{% else %}javaScript:void(0);{% endif %}">{{ section.settings.button_text2 }}</a>
+          {% endif %}
+          {% if section.settings.button_text3 != blank or section.settings.button_link3 != blank %}
+             <a class="third_btn v_d_show" href="{% if section.settings.button_link3 != blank %}{{ section.settings.button_link3 }}{% else %}javaScript:void(0);{% endif %}">{{ section.settings.button_text3 }}</a>
+          {% endif %}
+          {% if section.settings.button_text3 != blank or section.settings.mb_button_link3 != blank %}
+             <a class="third_btn hide v_mb_show" href="{% if section.settings.mb_button_link3 != blank %}{{ section.settings.mb_button_link3 }}{% else %}javaScript:void(0);{% endif %}">{{ section.settings.button_text3 }}</a>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+  
+</div>
+{% endif %}
+<style>
+  .full-video-main{position:relative;}
+.full-video-main .control-bar{position: absolute;right: 63px;bottom: 80px;z-index: 1;display: flex;align-items: center;}
+.full-video-main .control-bar button{margin-left: 22px;}
+.full-video-main .control-bar button#mute{background:transparent;border:0;}
+.full-video-main .control-bar #play img{margin: 0 auto;}
+.full-video-main video{height: calc(100vh - 160px);width: 100%;object-position: center;object-fit: cover;}
+.full-video-main .content a{padding-left: 14px; position: relative; display: inline-block;font-size: 16px;color:#fff;font-weight: normal;line-height: 1;letter-spacing: normal; text-decoration: none;margin: 0;text-transform: inherit; /* background:#fff;                   
+text-align: center;color: #000;overflow: hidden;border: 1px solid #fff;padding: 17px 20px;border-radius: 16px;*/}
+.full-video-main .content a:before { animation: DotFlash 1.2s ease infinite; background-color: #E23744; block-size: 6px; border-radius: 50%; content: ""; display: block; inline-size: 6px; inset-block-start: 50%; position: absolute; transform: translateY(-50%); transition: background-color .3s ease,transform .3s ease; z-index: 1; inset-inline-start: 0; }
+@keyframes DotFlash { 0% { opacity: 1 } 10% { opacity: 1 } 50% { opacity: 0 } 90% { opacity: 1 } to { opacity: 1 } }
+/* .full-video-main .content a:hover{background:transparent;color:#fff;} */
+.full-video-main .content {position: absolute; bottom: 0px; left: 0; /* transform: translateX(-50%); */ text-align: center; max-width: 640px; padding: 0 0 40px 24px; width: 100%;height: 100%; display: flex; align-items: flex-end; z-index: 8;flex-wrap: wrap;}
+.video_button_wrapper { display: flex; flex-wrap: wrap; gap: 24px; /*max-width: 560px;*/ justify-content: flex-start; position: sticky; bottom: 40px; height: auto; }
+.full-video-main .content h3{/*text-transform: capitalize;*/width: 100%;font-size: 26px;font-weight: 500;font-family: 'Helvetica Neue';line-height: 1.2;letter-spacing: 0;text-align: center;color: #fff;max-width: 100%;margin: 0;text-align: left;}
+.full-video-main svg{width: 26px;height: 26px;}
+.full-video-main .control-bar .mob{display:none;}
+.full-video-main .control-bar span img{width:25px;}
+.full-video-main img.video_banner_image{  height: calc(100vh - 160px);width: 100%;position: absolute;z-index: 8;top: 0;left: 0;object-fit: cover;}
+.full-video-main{position:relative;height: calc(100vh - 160px);}
+.full-video-main .video_banner_image.hidden-tablet-and-up_mobile{display:none;}
+  @media screen and (max-width: 767px) {
+    .full-video-main .third_btn.v_mb_show { display: block !important; }
+    .full-video-main .third_btn.v_d_show { display: none !important; }
+  }
+</style>
+<script>
+
+
+  window.addEventListener('load', function () {
+    console.log("window loaded");
+    document.querySelector(".video_banner_image").style.display = 'none';
+    
+    var videoElement = document.getElementById("video-main-{{ section.id }}");
+    videoElement.classList.remove('hide');
+    videoElement.play();
+});
+
+if (window.innerWidth <= 768) {
+    console.log('mobile');
+    document.querySelector('.full-video-main .video-main source').setAttribute('src', '{{ section.settings.mobile_video_link }}');
+    
+    if (navigator.userAgent.toLowerCase().match(/(ipad|iphone)/)) {
+        document.getElementById("video-main-{{ section.id }}").classList.remove('hide');
+    }
+}
+
+var videoElements = document.querySelectorAll(".video-{{ section.id }}");
+videoElements.forEach(video => video.muted = true);
+
+document.querySelector(".mute").addEventListener('click', function () {
+    videoElements.forEach(video => {
+        if (video.muted) {
+            video.muted = false;
+            document.querySelector(".mute-icon-{{ section.id }}").style.display = 'none';
+            document.querySelector(".unmute-icon-{{ section.id }}").style.display = 'block';
+        } else {
+            video.muted = true;
+            document.querySelector(".mute-icon-{{ section.id }}").style.display = 'block';
+            document.querySelector(".unmute-icon-{{ section.id }}").style.display = 'none';
+        }
+    });
+});
+
+document.querySelector(".vid-pause-{{ section.id }}").style.display = 'none';
+
+document.querySelector(".vid-pause-{{ section.id }}").addEventListener('click', function () {
+    this.style.display = 'none';
+    document.querySelector(".vid-play-{{ section.id }}").style.display = 'block';
+    document.getElementById("video-main-{{ section.id }}").play();
+});
+
+document.querySelector(".vid-play-{{ section.id }}").addEventListener('click', function () {
+    this.style.display = 'none';
+    document.querySelector(".vid-pause-{{ section.id }}").style.display = 'block';
+    document.getElementById("video-main-{{ section.id }}").pause();
+});
+
+   
+ 
+</script>                  
+
+{% schema %}
+  {
+    "name": "Full Video Section",
+    "settings": [
+      {
+        "type":"url",
+        "id":"desk_video_link",
+        "label":"Desktop Video Link"
+	  },
+      {
+        "type":"url",
+        "id":"mobile_video_link",
+        "label":"Mobile Video Link"
+	  },
+      {
+        "type":"image_picker",
+        "id":"desk_video_banner",
+        "label":"Desktop video banner image"
+	  },
+      {
+        "type":"image_picker",
+        "id":"mob_video_banner",
+        "label":"Mobile video banner image"
+	  },
+      {
+        "type":"text",
+        "id":"title",
+        "label":"Title"
+	  },
+      {
+        "type": "header",
+        "content": "Button 1"
+      },
+      {
+        "type":"text",
+        "id":"button_text",
+        "label":"Button Text"
+	  },
+      {
+        "type":"url",
+        "id":"button_link",
+        "label":"Button Link"
+	  },
+      {
+        "type": "header",
+        "content": "Button 2"
+      },
+      {
+        "type":"text",
+        "id":"button_text2",
+        "label":"Button Text"
+	  },
+      {
+        "type":"url",
+        "id":"button_link2",
+        "label":"Button Link"
+	  },
+      {
+        "type": "header",
+        "content": "Button 3"
+      },
+      {
+        "type":"text",
+        "id":"button_text3",
+        "label":"Button Text"
+	  },
+      {
+        "type":"url",
+        "id":"button_link3",
+        "label":"Button Link"
+	  },
+      {
+        "type":"url",
+        "id":"mb_button_link3",
+        "label":"Mobile Button Link"
+	  }
+    ],
+    "presets":[
+      {
+        "name":"Full Video Section"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
